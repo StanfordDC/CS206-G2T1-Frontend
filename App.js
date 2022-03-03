@@ -1,8 +1,8 @@
 import React from 'react';
-import Form from './LoginForm'
+import RegistrationForm from './RegistrationForm'
 const App = () => {
   return (
-    <Form />
+    <RegistrationForm />
   );
 };
 export default App;

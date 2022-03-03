@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Text, StyleSheet, View, TextInput, TouchableOpacity} from 'react-native';
 
-const LoginForm = () => {
+const RegistrationForm = () => {
   const [value, setValue] = useState(0);
   return (
     <View style={styles.container}>
@@ -9,22 +9,23 @@ const LoginForm = () => {
       <Text style={styles.formLabel}> Login Form </Text>
       <View>
         <TextInput placeholder="Enter Username" style={styles.inputStyle} />
+        <TextInput placeholder="Enter Email" style={styles.inputStyle} />
+        <TextInput placeholder="Enter Contact No." style={styles.inputStyle} />
         <TextInput
           secureTextEntry={true}
           placeholder="Enter Password"
           style={styles.inputStyle}
         />
         <TouchableOpacity style = {{backgroundColor: 'white', alignItems: 'center', marginTop: 10, }} onPress = {() => nav.navigate('Locations') }>
-        <Text style = {{color: '#3366BB', fontSize: 15, textDecorationLine: 'underline'}}> Forgot Password? </Text> 
       </TouchableOpacity>
       </View>
       <TouchableOpacity style = {{backgroundColor: '#4236A7', width: '75%', height: 35, alignItems: 'center', borderRadius: 10, marginTop: 70, justifyContent: 'center'}} onPress = {() => nav.navigate('Locations') }>
-        <Text style = {{color: 'white', fontSize: 20, fontWeight: 'bold'}}> Login </Text> 
+        <Text style = {{color: 'white', fontSize: 20, fontWeight: 'bold'}}> Sign Up </Text> 
       </TouchableOpacity>
       <View>
-      <Text style = {{alignItems: 'center', justifyContent:'center', marginTop: 10, fontSize: 15}}><Text>Don't have an account?</Text>
+      <Text style = {{alignItems: 'center', justifyContent:'center', marginTop: 10, fontSize: 15, marginLeft: 80}}><Text>Already have an account?</Text>
       <TouchableOpacity style = {{backgroundColor: 'white'}} onPress = {() => nav.navigate('Locations') }>
-        <Text style = {{color: '#3366BB', fontSize: 15, textDecorationLine: 'underline'}}> Create a new account </Text> 
+        <Text style = {{color: '#3366BB', fontSize: 15, textDecorationLine: 'underline'}}> Login </Text> 
       </TouchableOpacity>
       </Text>
       </View>
@@ -66,4 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginForm;
+export default RegistrationForm;
