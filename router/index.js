@@ -5,7 +5,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Routes from './routes';
 
 import SplashScreen from "../screens/splash/SplashScreen";
-import ProfileScreen from '../screens/profile/ProfileScreen';
+import UserLoginScreen from "../screens/user/login/UserLoginScreen";
+
 import RestaurantScreen from '../screens/user/restaurant/RestaurantScreen';
 import QueueScreen from '../screens/user/restaurant/QueueScreen';
 import OrderHistoryScreen from '../screens/user/restaurant/OrderHistoryScreen';
@@ -20,7 +21,7 @@ const Tab = createBottomTabNavigator();
 const AppNavigator = (props) => {
     return(
         <NavigationContainer>
-            <Stack.Navigator headerMode="none" initialRouteName={Routes.BusinessLoginScreen}>
+            <Stack.Navigator headerMode="none" initialRouteName={Routes.UserLoginScreen}>
                 <Stack.Screen
                     options={{headerShown: false}}
                     name={Routes.SplashScreen}
@@ -31,6 +32,8 @@ const AppNavigator = (props) => {
                     name={Routes.RestaurantScreen}
                     component={RestaurantScreen}
                 />
+                <Stack.Screen options={{headerShown: false}} name={Routes.UserLoginScreen} component={UserLoginScreen} />
+
                 <Stack.Screen options={{headerShown: false}} name={Routes.QueueScreen} component={QueueScreen} />
                 <Stack.Screen options={{headerShown: false}} name={Routes.OrderHistoryScreen} component={OrderHistoryScreen} />
                 <Stack.Screen options={{headerShown: false}} name={Routes.OrderScreen} component={OrderScreen} />

@@ -15,7 +15,7 @@ const BusinessLoginScreen = ({setLoaderAction, navigation}) => {
     const [passwordError, setPasswordError] = useState('');
     const [loginError, setLoginError] = useState('');
 
-    const checkSignIn = async() => {
+    const SignIn = async() => {
         Keyboard.dismiss();
         if (uen !== '' && password !== ''){
 //             //setLoaderAction(true)
@@ -30,33 +30,46 @@ const BusinessLoginScreen = ({setLoaderAction, navigation}) => {
 
     return(
         <View style={styles.container}>
+            <View>
+                <Text style={styles.logo}> Q-now </Text>
+                <Text style={styles.bizLabel}>business</Text>
+            </View>
             <View style={styles.form}>
-                <Text style={styles.inputError}>{uenError}</Text>
                 <TextInput style={styles.input}
-                    placeholder={'Business UEN'}
-                    placeholderTextColor={Colors.black}
+                    placeholder='Business UEN'
                     onChangeText={(updateUEN)=> setUen(updateUEN)}
                     onChange={()=> setUenError('')}
                     autoCapitalize={'none'}
                     autoCorrect={false}
                 />
-                <Text style={styles.inputError}>{passwordError}</Text>
+                <Text style={styles.inputError}>{uenError}</Text>
                 <TextInput style={styles.input}
-                    placeholder={'Password'}
-                    placeholderTextColor={Colors.black}
+                    placeholder='Password'
                     onChangeText={(updatePass) => setPassword(updatePass)}
                     onChange={()=> setPasswordError('')}
                     secureTextEntry={true}
                 />
-
-                <TouchableOpacity style={styles.button}>
-                    <Text onPress={checkSignIn}>Login</Text>
+                <Text style={styles.inputError}>{passwordError}</Text>
+                <TouchableOpacity style={styles.forgetPass} onPress = {() => nav.navigate('Locations') }>
+                    <Text style={styles.forgetPassText}> Forgot Password? </Text>
                 </TouchableOpacity>
+
             </View>
+
+            <Text style={styles.pressableText}
+            onPress={()=>navigation.replace(Routes.UserLoginScreen)}>
+                Switch To User</Text>
+
+            <TouchableOpacity style={styles.button} onPress={SignIn}>
+                <Text style={styles.loginText}> Login </Text>
+            </TouchableOpacity>
+
+            <Text style={styles.text}>Don't have an account?
+            <Text onPress={()=>nav.navigate('location')}
+                style={styles.pressableText}> Create a new account</Text>
+            </Text>
         </View>
     );
-
-
 }
 
 const mapDispatchToProps = dispatch => {

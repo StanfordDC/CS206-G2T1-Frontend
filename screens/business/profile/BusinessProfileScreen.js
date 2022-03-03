@@ -12,7 +12,7 @@ const BusinessProfileScreen = ({navigation}) => {
         <View style={styles.container}>
             <View style={styles.image}>
                 <Image style={{width: '100%', height:80}}
-                   source={require('../../../assets/business-profile-background')}/>
+                   source={require('../../../assets/business-profile-background.jpg')}/>
             </View>
             <View style={styles.body}>
 
