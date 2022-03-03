@@ -1,7 +1,13 @@
 const Routes = {
     SplashScreen: 'SplashScreen',
-    LoginScreen: 'LoginScreen',
     ProfileScreen: 'ProfileScreen',
+    RestaurantScreen: 'RestaurantScreen',
+    QueueScreen: 'QueueScreen',
+    OrderHistoryScreen: 'OrderHistoryScreen',
+    OrderScreen: 'OrderScreen',
+
+    BusinessLoginScreen: 'BusinessLoginScreen',
+    BusinessProfileScreen: 'BusinessProfileScreen',
 }
 
 export default Routes;

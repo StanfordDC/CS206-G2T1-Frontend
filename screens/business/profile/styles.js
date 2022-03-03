@@ -1,10 +1,10 @@
 import {StyleSheet} from 'react-native';
-import Colors from '../../utils/Colors';
+import Colors from '../../../utils/Colors';
 
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         justifyContent: 'flex-start',
     },
     image:{
@@ -22,18 +22,6 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
         margin: 15
     },
-    title:{
-        fontSize: 16,
-    },
-    box:{
-        height: 70,
-        alignSelf: 'stretch',
 
-    },
-    input:{
-        fontSize:15,
-    }
-
-});
-
-export default styles
+})
+export default styles;
