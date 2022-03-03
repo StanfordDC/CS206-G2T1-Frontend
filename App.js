@@ -1,22 +1,20 @@
-import React from 'react';
-import {View} from 'react-native';
-import {Provider} from 'react-redux';
-import {store, persistor} from './redux/store';
-import {PersistGate} from 'redux-persist/integration/react';
-import AppNavigator from "./router";
-import MainContainer from "./components/MainContainer";
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
 
-const App = () =>{
-    return(
-        <Provider store={store}>
-            <PersistGate persistor={persistor}>
-                <View style={{flex:1}}>
-                    <AppNavigator/>
-                    <MainContainer/>
-                </View>
-            </PersistGate>
-        </Provider>
-    );
-};
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <Text>Open up App.js to start working on your app!</Text>
+      <StatusBar style="auto" />
+    </View>
+  );
+}
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
