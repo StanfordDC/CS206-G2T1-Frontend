@@ -259,7 +259,7 @@ export const AppNavigator = () => {
   );
 };
 
-const App = () => {
+const Restaurant = () => {
 
   return (
       <NavigationContainer>
@@ -268,7 +268,7 @@ const App = () => {
   );
 };
 
-export default App;
+export default Restaurant;
 
 const styles = StyleSheet.create({
   layout: {
