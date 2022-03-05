@@ -6,6 +6,7 @@ import Routes from './routes';
 
 import SplashScreen from "../screens/splash/SplashScreen";
 import UserLoginScreen from "../screens/user/login/UserLoginScreen";
+import UserRegistrationScreen from "../screens/user/register/UserRegistrationScreen";
 
 import RestaurantScreen from '../screens/user/restaurant/RestaurantScreen';
 import QueueScreen from '../screens/user/restaurant/QueueScreen';
@@ -13,7 +14,10 @@ import OrderHistoryScreen from '../screens/user/restaurant/OrderHistoryScreen';
 import OrderScreen from '../screens/user/restaurant/OrderScreen';
 
 import BusinessLoginScreen from '../screens/business/login/BusinessLoginScreen';
+import BusinessRegistrationScreen from '../screens/business/register/BusinessRegistrationScreen';
 import BusinessProfileScreen from '../screens/business/profile/BusinessProfileScreen';
+
+import PaymentScreen from '../screens/payment/PaymentScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -33,13 +37,17 @@ const AppNavigator = (props) => {
                     component={RestaurantScreen}
                 />
                 <Stack.Screen options={{headerShown: false}} name={Routes.UserLoginScreen} component={UserLoginScreen} />
+                <Stack.Screen options={{headerShown: false}} name={Routes.UserRegistrationScreen} component={UserRegistrationScreen} />
 
                 <Stack.Screen options={{headerShown: false}} name={Routes.QueueScreen} component={QueueScreen} />
                 <Stack.Screen options={{headerShown: false}} name={Routes.OrderHistoryScreen} component={OrderHistoryScreen} />
                 <Stack.Screen options={{headerShown: false}} name={Routes.OrderScreen} component={OrderScreen} />
 
                 <Stack.Screen options={{headerShown: false}} name={Routes.BusinessLoginScreen} component={BusinessLoginScreen} />
+                <Stack.Screen options={{headerShown: false}} name={Routes.BusinessRegistrationScreen} component={BusinessRegistrationScreen} />
                 <Stack.Screen options={{headerShown: false}} name={Routes.BusinessProfileScreen} component={BusinessProfileScreen} />
+
+                <Stack.Screen options={{headerShown: false}} name={Routes.PaymentScreen} component={PaymentScreen} />
 
             </Stack.Navigator>
         </NavigationContainer>

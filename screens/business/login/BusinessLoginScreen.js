@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 
 import styles from './styles';
 import Routes from '../../../router/routes';
-import Colors from '../../../utils/Colors';
 
 const BusinessLoginScreen = ({setLoaderAction, navigation}) => {
 
@@ -65,7 +64,7 @@ const BusinessLoginScreen = ({setLoaderAction, navigation}) => {
             </TouchableOpacity>
 
             <Text style={styles.text}>Don't have an account?
-            <Text onPress={()=>nav.navigate('location')}
+            <Text onPress={()=>navigation.push(Routes.BusinessRegistrationScreen)}
                 style={styles.pressableText}> Create a new account</Text>
             </Text>
         </View>

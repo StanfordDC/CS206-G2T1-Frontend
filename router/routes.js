@@ -7,8 +7,11 @@ const Routes = {
     OrderScreen: 'OrderScreen',
 
     UserLoginScreen: 'UserLoginScreen',
+    UserRegistrationScreen: 'UserRegistrationScreen',
     BusinessLoginScreen: 'BusinessLoginScreen',
+    BusinessRegistrationScreen :'BusinessRegistrationScreen',
     BusinessProfileScreen: 'BusinessProfileScreen',
+    PaymentScreen: 'PaymentScreen',
 }
 
 export default Routes;

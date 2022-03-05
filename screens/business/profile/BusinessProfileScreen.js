@@ -11,11 +11,12 @@ const BusinessProfileScreen = ({navigation}) => {
     return(
         <View style={styles.container}>
             <View style={styles.image}>
-                <Image style={{width: '100%', height:80}}
+                <Image style={{width:'100%', height:'100%'}}
                    source={require('../../../assets/business-profile-background.jpg')}/>
             </View>
             <View style={styles.body}>
-
+                <Text style={styles.header}>Business Profile</Text>
+                
             </View>
         </View>
     );

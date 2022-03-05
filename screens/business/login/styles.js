@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline'
     },
     button: {
-        backgroundColor: Colors.themeBlue,
+        backgroundColor: Colors.themeRed,
         width: '75%',
         height: 50,
         alignItems: 'center',

@@ -17,7 +17,7 @@ const UserLoginScreen = ({navigation}) => {
   const SignIn = async() => {
     Keyboard.dismiss();
     if (username !== '' && password !== ''){
-        nav.navigation('location');
+        navigation.replace(Routes.PaymentScreen);
     }
     if (username !== ''){setUserError('')}
     else{setUserError('Username should not be empty')}
@@ -60,7 +60,7 @@ const UserLoginScreen = ({navigation}) => {
       </TouchableOpacity>
 
       <Text style={styles.text}>Don't have an account?
-      <Text onPress={()=>nav.navigate('location')}
+      <Text onPress={()=>navigation.push(Routes.UserRegistrationScreen)}
             style={styles.pressableText}> Create a new account</Text>
       </Text>
     </View>
