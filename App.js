@@ -15,7 +15,7 @@ class ItemBox extends React.Component {
 
   return (
     <TouchableOpacity style = {{backgroundColor: 'white', shadowRadius: 1, borderRadius: 10, marginTop: 15, justifyContent: 'space-evenly', alignItems: 'center', width: 150, height: 200}}>
-        <Image style = {{width: 75, height: 75, borderRadius: 5}} source = {{uri : 'https://th.bing.com/th/id/OIP.2A6VgPhQGmqQ0C7mMkv6eAHaJh?pid=ImgDet&rs=1'}}></Image>
+        <Image style = {{width: 120, height: 120, borderRadius: 50}} source = {{uri : 'https://th.bing.com/th/id/OIP.2A6VgPhQGmqQ0C7mMkv6eAHaJh?pid=ImgDet&rs=1'}}></Image>
         <View>
           <Text style = {{marginBottom: 20, fontWeight: 'bold'}}> {order.name}</Text>
         </View>
