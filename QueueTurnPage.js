@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Text, StyleSheet, View, TextInput, TouchableOpacity, Image} from 'react-native';
 
-const QueuePage = () => {
+const QueueTurnPage = () => {
   const [value, setValue] = useState(0);
   return (
     <View style={styles.container}>
@@ -10,20 +10,11 @@ const QueuePage = () => {
 
       <View style = {{flexDirection: 'row', justifyContent: 'space-between'}}>
         <Image style = {{width: 75, height : 75, marginRight: 10}} source = {{uri: 'https://cdn2.iconfinder.com/data/icons/circle-avatars-1/128/039_girl_avatar_profile_woman_headband-512.png' }}></Image>
-        <View>
-            <Text style = {{textAlign: 'center', color: '#80807F', fontWeight: 'bold', marginBottom: 3}}>Queue Position:</Text>
-            <Text style = {{textAlign: 'center', marginBottom: 3}}>4 people ahead of you</Text>
-            <Text style = {{textAlign: 'center', color: '#80807F', fontWeight: 'bold', marginBottom: 3}}>Estimated waiting time:</Text>
-            <Text style = {{textAlign: 'center', marginBottom: 3}}>15-20 min</Text>
+        <View style = {{justifyContent: 'center'}}>
+            <Text style = {{textAlign: 'center', color: '#DF2C2C', fontWeight: 'bold', marginBottom: 3}}>It's your turn</Text>
+            <Text style = {{textAlign: 'center', color: '#000000', fontWeight: 'bold', marginBottom: 3}}>Please head to the shop now</Text>
         </View>
       </View>      
-    
-      <TouchableOpacity style = {{backgroundColor: '#A73636', width: '75%', height: 55, alignItems: 'center', borderRadius: 25, marginTop: 70, justifyContent: 'center'}} onPress = {() => nav.navigate('Locations') }>
-        <Text style = {{color: 'white', fontSize: 20, fontWeight: 'bold'}}> Leave Queue </Text> 
-      </TouchableOpacity>
-      <View>
-      </View>
-
     </View>
   );
 };
@@ -34,7 +25,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 50,
   },
 
   formLabel: {
@@ -61,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default QueuePage;
+export default QueueTurnPage;

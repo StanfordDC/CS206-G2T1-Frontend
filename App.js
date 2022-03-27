@@ -1,8 +1,8 @@
 import React from 'react';
-import Queue from './QueuePage'
+import QueueTurn from './QueueTurnPage'
 const App = () => {
   return (
-    <Queue />
+    <QueueTurn />
   );
 };
 export default App;
