@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     },
     body:{
         flex:3,
-        justifyContent: 'flex-start',
     },
     header:{
         fontSize: 18,
@@ -25,7 +24,39 @@ const styles = StyleSheet.create({
         marginHorizontal: 15,
         marginTop: 20,
     },
-
-
+    table:{
+        marginTop: 20
+    },
+    rows: {
+        width:'100%',
+        height: 50,
+        flexDirection:'row',
+        alignItems: 'center',
+        borderWidth: StyleSheet.hairlineWidth,
+        borderColor: Colors.grey
+    },
+    rowHeader: {
+        marginHorizontal: 20,
+        width: 100
+    },
+    rowText: {
+        marginHorizontal:20,
+        color: Colors.grey,
+    },
+    buttonContainer:{
+        marginTop: 60,
+        alignItems: 'center',
+    },
+    button:{
+        width: '75%',
+        height: 50,
+        justifyContent: 'center',
+        alignItems:'center',
+        borderRadius: 10,
+        backgroundColor: Colors.themeBlue
+    },
+    buttonText:{
+        color: Colors.white,
+    }
 })
 export default styles;

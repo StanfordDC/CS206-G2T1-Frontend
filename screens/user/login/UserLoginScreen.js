@@ -17,13 +17,12 @@ const UserLoginScreen = ({navigation}) => {
   const SignIn = async() => {
     Keyboard.dismiss();
     if (username !== '' && password !== ''){
-        navigation.replace(Routes.PaymentScreen);
+        navigation.replace(Routes.Customer);
     }
     if (username !== ''){setUserError('')}
     else{setUserError('Username should not be empty')}
     if (password !== ''){setPasswordError('')}
     else{setPasswordError('Password should not be empty')}
-
   }
 
   return (

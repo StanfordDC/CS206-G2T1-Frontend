@@ -1,16 +1,22 @@
 const Routes = {
     SplashScreen: 'SplashScreen',
+    UserLoginScreen: 'UserLoginScreen',
+    UserRegistrationScreen: 'UserRegistrationScreen',
+    BusinessLoginScreen: 'BusinessLoginScreen',
+    BusinessRegistrationScreen :'BusinessRegistrationScreen',
 
+    Customer: 'Customer',
     RestaurantScreen: 'RestaurantScreen',
     QueueScreen: 'QueueScreen',
     OrderHistoryScreen: 'OrderHistoryScreen',
     OrderScreen: 'OrderScreen',
 
-    UserLoginScreen: 'UserLoginScreen',
-    UserRegistrationScreen: 'UserRegistrationScreen',
-    BusinessLoginScreen: 'BusinessLoginScreen',
-    BusinessRegistrationScreen :'BusinessRegistrationScreen',
+
     BusinessProfileScreen: 'BusinessProfileScreen',
+    BusinessHomeScreen: 'BusinessHomeScreen',
+    BusinessOrdersScreen: 'BusinessOrdersScreen',
+
+
     PaymentScreen: 'PaymentScreen',
 }
 
