@@ -1,8 +1,8 @@
 import React from 'react';
-import Form from './LoginForm'
+import Queue from './QueuePage'
 const App = () => {
   return (
-    <Form />
+    <Queue />
   );
 };
 export default App;
