@@ -15,11 +15,14 @@ class OrderRow extends React.Component {
 
   return (
     <TouchableOpacity style = {{backgroundColor: 'white', shadowRadius: 1, width: '75%', height: '18%', borderRadius: 10, marginTop: 15, justifyContent: 'center'}}>
-      <View style = {{flexDirection: 'row', justifyContent: 'space-around', alignItems:'center'}}>
-        <Image style = {{width: 75, height: 75, borderRadius: 5 }} source = {{uri : 'https://th.bing.com/th/id/OIP.Ft_RM5qjJsN01TF2Vn5-bgHaHa?pid=ImgDet&rs=1'}}></Image>
+      <View style = {{flexDirection: 'row', justifyContent: 'flex-start', alignItems:'center', marginLeft: 20}}>
+        <Image style = {{width: 75, height: 75, borderRadius: 5, marginRight: 20}} source = {{uri : 'https://th.bing.com/th/id/OIP.2A6VgPhQGmqQ0C7mMkv6eAHaJh?pid=ImgDet&rs=1'}}></Image>
         <View>
           <Text style = {{marginBottom: 20, fontWeight: 'bold', textAlign: 'left'}}> {order.name}</Text>
-          <Text> {order.date} </Text>
+          <View style = {{flexDirection: 'row'}}>
+            <Text style = {{color: '#DE8060'}}>{order.price}</Text>
+            <View style = {{width: 45, height: 18, backgroundColor: '#DE8060', borderRadius: 10, marginLeft: 40}}><Text style = {{textAlign: 'center', color: 'white'}}>{order.quantity}</Text></View> 
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -48,7 +51,8 @@ class OrderRow extends React.Component {
 
     return (
      <ScrollView> 
-       <View style = {{alignItems: 'center'}}>
+      <Text style = {{textAlign: 'center', marginTop: 10, fontSize: 20, fontWeight: 'bold'}}> Starbucks </Text>
+      <View style = {{alignItems: 'center'}}>
       {rows}
       </View>
     </ScrollView>
@@ -58,7 +62,7 @@ class OrderRow extends React.Component {
 
      
 
-const OrderHistoryScreen = () => {
+const FoodOrderHistoryScreen = () => {
 
   return (
     <OrderTable></OrderTable>
@@ -71,7 +75,7 @@ export const AppNavigator = () => {
 
   return (
     <Stack.Navigator>
-        <Stack.Screen name="Order History" component={OrderHistoryScreen} />
+        <Stack.Screen name="Order History" component={FoodOrderHistoryScreen} />
     </Stack.Navigator>
   );
 };
@@ -123,10 +127,10 @@ const styles = StyleSheet.create({
 
 
 const ORDERS = [
-  {name: 'Starbucks', date: '12/12/2022', image: 'https://th.bing.com/th/id/OIP.Ft_RM5qjJsN01TF2Vn5-bgHaHa?pid=ImgDet&rs=1'},
-  {name: 'Jollibee', date: '12/12/2022', image: 'https://th.bing.com/th/id/OIP.Ft_RM5qjJsN01TF2Vn5-bgHaHa?pid=ImgDet&rs=1'},
-  {name: 'Genki', date: '12/12/2022', image: 'https://th.bing.com/th/id/OIP.Ft_RM5qjJsN01TF2Vn5-bgHaHa?pid=ImgDet&rs=1'},
-  {name: 'Din Tai Fung', date: '12/12/2022', image: 'https://th.bing.com/th/id/OIP.Ft_RM5qjJsN01TF2Vn5-bgHaHa?pid=ImgDet&rs=1'},
-  {name: 'KFC', date: '12/12/2022', image: 'https://th.bing.com/th/id/OIP.Ft_RM5qjJsN01TF2Vn5-bgHaHa?pid=ImgDet&rs=1'},
-  {name: 'Sushi Express', date: '12/12/2022', image: 'https://th.bing.com/th/id/OIP.Ft_RM5qjJsN01TF2Vn5-bgHaHa?pid=ImgDet&rs=1'}
+  {name: 'Caramel Macchiato', price: '$7.60', quantity: '2', image: 'https://www.starbucks.com.sg/menu/beverages/espresso-beverages/oatmilk-cocoa-macchiato'},
+  {name: 'Oatmilk Cocoa Macchiato', price: '$7.80', quantity: '2', image: 'https://th.bing.com/th/id/OIP.Ft_RM5qjJsN01TF2Vn5-bgHaHa?pid=ImgDet&rs=1'},
+  {name: 'Nitro Cold Brew', price: '$6.50',  quantity: '2', image: 'https://th.bing.com/th/id/OIP.Ft_RM5qjJsN01TF2Vn5-bgHaHa?pid=ImgDet&rs=1'},
+  {name: 'Almond Croissant', price: '$7.20',  quantity: '2', image: 'https://th.bing.com/th/id/OIP.Ft_RM5qjJsN01TF2Vn5-bgHaHa?pid=ImgDet&rs=1'},
+  {name: 'Breakfast Pancakes', price: '$7.50', quantity: '2',image: 'https://th.bing.com/th/id/OIP.Ft_RM5qjJsN01TF2Vn5-bgHaHa?pid=ImgDet&rs=1'},
+  {name: 'Banana Walnut Muffin', price: '$4.20',  quantity: '2', image: 'https://th.bing.com/th/id/OIP.Ft_RM5qjJsN01TF2Vn5-bgHaHa?pid=ImgDet&rs=1'}
 ];
