@@ -14,18 +14,22 @@ class OrderRow extends React.Component {
     const order = this.props.order;
 
   return (
-    <TouchableOpacity style = {{backgroundColor: 'white', shadowRadius: 1, width: '75%', height: '18%', borderRadius: 10, marginTop: 15, justifyContent: 'center'}}>
+    <View style = {{backgroundColor: 'white', shadowRadius: 1, width: '80%', height: 120, borderRadius: 10, marginTop: 15, justifyContent: 'center'}}>
       <View style = {{flexDirection: 'row', justifyContent: 'flex-start', alignItems:'center', marginLeft: 20}}>
         <Image style = {{width: 75, height: 75, borderRadius: 5, marginRight: 20}} source = {{uri : 'https://th.bing.com/th/id/OIP.2A6VgPhQGmqQ0C7mMkv6eAHaJh?pid=ImgDet&rs=1'}}></Image>
         <View>
           <Text style = {{marginBottom: 20, fontWeight: 'bold', textAlign: 'left'}}> {order.name}</Text>
           <View style = {{flexDirection: 'row'}}>
             <Text style = {{color: '#DE8060'}}>{order.price}</Text>
-            <View style = {{width: 45, height: 18, backgroundColor: '#DE8060', borderRadius: 10, marginLeft: 40}}><Text style = {{textAlign: 'center', color: 'white'}}>{order.quantity}</Text></View> 
+            <View style = {{width: 75, height: 18, backgroundColor: '#DE8060', borderRadius: 10, marginLeft: 40, flexDirection: 'row', justifyContent: 'space-around'}}>
+              <TouchableOpacity style = {{alignContents: 'center'}}><Text style = {{color: 'white'}}>-</Text></TouchableOpacity>
+              <Text style = {{color: 'white'}} >{order.quantity}</Text>
+              <TouchableOpacity><Text style = {{color: 'white'}}>+</Text></TouchableOpacity>
+            </View> 
           </View>
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 }
 }
@@ -50,19 +54,23 @@ class OrderRow extends React.Component {
     });
 
     return (
-     <ScrollView> 
-      <Text style = {{textAlign: 'center', marginTop: 10, fontSize: 20, fontWeight: 'bold'}}> Starbucks </Text>
-      <View style = {{alignItems: 'center'}}>
+    <View style = {{height: '90%'}}>
+     <ScrollView centerContent = {true} contentContainerStyle = {styles.contentContainer}> 
+
       {rows}
-      </View>
+      
     </ScrollView>
+    <TouchableOpacity style = {{backgroundColor: '#4236A7', width: '75%', height: 55, alignItems: 'center', borderRadius: 25, marginTop: 70, justifyContent: 'center', alignSelf: 'center'}} onPress = {() => nav.navigate('Locations') }>
+        <Text style = {{color: 'white', fontSize: 20, fontWeight: 'bold'}}> Order </Text> 
+    </TouchableOpacity>
+    </View>
     );
  }
      }
 
      
 
-const FoodOrderHistoryScreen = () => {
+const CartScreen = () => {
 
   return (
     <OrderTable></OrderTable>
@@ -75,7 +83,7 @@ export const AppNavigator = () => {
 
   return (
     <Stack.Navigator>
-        <Stack.Screen name="Order History" component={FoodOrderHistoryScreen} />
+        <Stack.Screen name="Cart" component={CartScreen} />
     </Stack.Navigator>
   );
 };
@@ -122,6 +130,10 @@ const styles = StyleSheet.create({
   restaurantDetails: {
     fontSize: 20,
     padding: 5,
+  }, 
+  contentContainer: {
+    alignItems: 'center', 
+    justifyContent: 'space-around'
   }
 });
 
@@ -130,7 +142,4 @@ const ORDERS = [
   {name: 'Caramel Macchiato', price: '$7.60', quantity: '2', image: 'https://www.starbucks.com.sg/menu/beverages/espresso-beverages/oatmilk-cocoa-macchiato'},
   {name: 'Oatmilk Cocoa Macchiato', price: '$7.80', quantity: '2', image: 'https://th.bing.com/th/id/OIP.Ft_RM5qjJsN01TF2Vn5-bgHaHa?pid=ImgDet&rs=1'},
   {name: 'Nitro Cold Brew', price: '$6.50',  quantity: '2', image: 'https://th.bing.com/th/id/OIP.Ft_RM5qjJsN01TF2Vn5-bgHaHa?pid=ImgDet&rs=1'},
-  {name: 'Almond Croissant', price: '$7.20',  quantity: '2', image: 'https://th.bing.com/th/id/OIP.Ft_RM5qjJsN01TF2Vn5-bgHaHa?pid=ImgDet&rs=1'},
-  {name: 'Breakfast Pancakes', price: '$7.50', quantity: '2',image: 'https://th.bing.com/th/id/OIP.Ft_RM5qjJsN01TF2Vn5-bgHaHa?pid=ImgDet&rs=1'},
-  {name: 'Banana Walnut Muffin', price: '$4.20',  quantity: '2', image: 'https://th.bing.com/th/id/OIP.Ft_RM5qjJsN01TF2Vn5-bgHaHa?pid=ImgDet&rs=1'}
 ];
