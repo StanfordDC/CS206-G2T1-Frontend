@@ -8,7 +8,7 @@ import styles from './styles';
 import Routes from '../../../router/routes';
 
 
-const BusinessHomeScreen = ()=>{
+const BusinessHomeScreen = () =>{
     const [modalVisible, setModalVisible] = useState(false);
     const [isList, setIsList] = useState(true);
 
@@ -82,11 +82,22 @@ const BusinessHomeScreen = ()=>{
     );
 }
 
+const TableList = [
+    {table: 'Window Seat 1', pax: '5', availability: '20 mins'},
+    {table: 'Window Seat 2',pax: '10', availability: '50 mins'},
+    {table: 'Window Seat 3', pax: '5', availability: '20mins'},
+    {table: 'Seat 1', pax: '3', availability: '20mins'},
+    {table: 'Seat 2', pax: '2', availability: '20mins'}
+];
+
 const SortByList = () =>{
+
     return(
         <ScrollView>
-            <View style={{width: '100%'}}>
-                <Text>list</Text>
+            <View style={{paddingHorizontal: 10,}}>
+                {TableList.map((item, index) => (
+                    <Text key={index.toString()}>{item.table} {item.pax} {item.availability}</Text>
+                ))}
             </View>
         </ScrollView>
     );
@@ -95,8 +106,11 @@ const SortByList = () =>{
 const SortByDiagram = () =>{
     return(
         <ScrollView>
-            <View style={{width: '100%'}}>
-                <Text>diagram</Text>
+            <View style={{paddingHorizontal: 10, }}>
+                {TableList.map((item, index) => (
+                    <TouchableOpacity key={index.toString()} style={{height:50, width: 50, color:'#000'}}><Text style={{color:'white'}}>{item.table}</Text>
+                    </TouchableOpacity>
+                ))}
             </View>
         </ScrollView>
     );

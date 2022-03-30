@@ -17,7 +17,7 @@ const UserLoginScreen = ({navigation}) => {
   const SignIn = async() => {
     Keyboard.dismiss();
     if (username !== '' && password !== ''){
-        navigation.replace(Routes.Customer);
+        navigation.replace(Routes.Customer, {screen: Routes.RestaurantScreen});
     }
     if (username !== ''){setUserError('')}
     else{setUserError('Username should not be empty')}

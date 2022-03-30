@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, Text, View, TouchableOpacity, Image, Alert, Modal} from 'react-native';
 import {setLoader} from '../../../redux/actions/CommonAction';
 import {connect} from 'react-redux';
+
 import styles from './styles';
 import Routes from '../../../router/routes';
 

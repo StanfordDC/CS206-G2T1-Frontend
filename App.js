@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, StatusBar} from 'react-native';
 import {Provider} from 'react-redux';
 import {store, persistor} from './redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
@@ -11,6 +11,7 @@ const App = () =>{
         <Provider store={store}>
             <PersistGate persistor={persistor}>
                 <View style={{flex:1}}>
+                    <StatusBar hidden={true}/>
                     <AppNavigator/>
                     <MainContainer/>
                 </View>

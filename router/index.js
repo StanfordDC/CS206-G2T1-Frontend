@@ -10,7 +10,10 @@ import UserLoginScreen from "../screens/user/login/UserLoginScreen";
 import UserRegistrationScreen from "../screens/user/register/UserRegistrationScreen";
 
 import RestaurantScreen from '../screens/user/restaurant/RestaurantScreen';
-import QueueScreen from '../screens/user/restaurant/QueueScreen';
+import QueueScreen from '../screens/user/restaurant/queue/QueueScreen';
+import CartScreen from '../screens/user/restaurant/cart/CartScreen';
+import HistoryScreen from '../screens/user/restaurant/history/HistoryScreen';
+
 import OrderHistoryScreen from '../screens/user/restaurant/OrderHistoryScreen';
 import OrderScreen from '../screens/user/restaurant/OrderScreen';
 
@@ -29,7 +32,7 @@ const Tab = createBottomTabNavigator();
 const AppNavigator = (props) => {
     return(
         <NavigationContainer>
-            <Stack.Navigator headerMode="none" initialRouteName={Routes.UserLoginScreen}>
+            <Stack.Navigator headerMode="none" initialRouteName={Routes.BusinessHomeScreen}>
                 <Stack.Screen
                     options={{headerShown: false}}
                     name={Routes.SplashScreen}
@@ -40,12 +43,17 @@ const AppNavigator = (props) => {
                    name="Customer"
                    component={Customer}
                 />
-
+                <Stack.Screen options={{headerShown: false}} name={Routes.QueueScreen} component={QueueScreen} />
+<Stack.Screen options={{headerShown: false}}
+                name={Routes.HistoryScreen}
+                component={HistoryScreen} />
 
                 <Stack.Screen options={{headerShown: false}} name={Routes.UserLoginScreen} component={UserLoginScreen} />
                 <Stack.Screen options={{headerShown: false}} name={Routes.UserRegistrationScreen} component={UserRegistrationScreen} />
 
-                <Stack.Screen options={{headerShown: false}} name={Routes.QueueScreen} component={QueueScreen} />
+
+
+
                 <Stack.Screen options={{headerShown: false}} name={Routes.OrderHistoryScreen} component={OrderHistoryScreen} />
                 <Stack.Screen options={{headerShown: false}} name={Routes.OrderScreen} component={OrderScreen} />
 
@@ -74,12 +82,14 @@ const AppNavigator = (props) => {
 
 const Customer = () => {
    return(
-       <Tab.Navigator>
-            <Tab.Screen
-                options={{headerShown: false}}
+       <Tab.Navigator screenOptions={{showLabel: false, style: {position:'absolute', elevation:0}}}>
+            <Tab.Screen options={{headerShown: false}}
                 name={Routes.RestaurantScreen}
                 component={RestaurantScreen}
             />
+
+
+            <Stack.Screen options={{headerShown: false}} name={Routes.CartScreen} component={CartScreen} />
        </Tab.Navigator>
    );
 }

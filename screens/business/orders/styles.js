@@ -8,6 +8,19 @@ const styles = StyleSheet.create({
             alignItems: 'center',
             justifyContent: 'flex-start',
     },
+    modalContainer:{
+        flex:1,
+        backgroundColor: Colors.black40,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    modal:{
+        backgroundColor: Colors.themeBlue,
+        alignSelf: 'center',
+        height: 400,
+        width: '80%',
+        borderRadius: 10,
+    },
     topBar:{
         width: '100%',
         marginTop: 30,
@@ -27,6 +40,7 @@ const styles = StyleSheet.create({
     body:{
         width: '100%',
         paddingHorizontal: 15,
+        marginTop: 15,
     },
 })
 export default styles;

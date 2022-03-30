@@ -8,6 +8,9 @@ const Routes = {
     Customer: 'Customer',
     RestaurantScreen: 'RestaurantScreen',
     QueueScreen: 'QueueScreen',
+    CartScreen: 'CartScreen',
+    HistoryScreen: 'HistoryScreen',
+
     OrderHistoryScreen: 'OrderHistoryScreen',
     OrderScreen: 'OrderScreen',
 
