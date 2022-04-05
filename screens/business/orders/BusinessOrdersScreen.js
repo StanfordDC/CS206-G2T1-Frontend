@@ -1,19 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, ScrollView, Modal} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import axios from 'axios';
 import {setLoader} from '../../../redux/actions/CommonAction';
 import {connect} from 'react-redux';
-import {ORDER_BUSINESS_API} from '../../../utils/Const';
 
 import styles from './styles';
 import Routes from '../../../router/routes';
 
-const BusinessOrdersScreen = ({navigation, businessName, storedBID, setLoaderAction}) =>{
-
-    const [openDrawer, setOpenDrawer] = useState(false);
-    const [order, setOrder] = useState([]);
-
+const BusinessOrdersScreen = () =>{
     const OrderList = [
         {num:'XE6885B', time: '14:21', price:'$25.21'},
         {num:'XE6895B', time: '14:21', price:'$30.21'},
@@ -21,62 +15,20 @@ const BusinessOrdersScreen = ({navigation, businessName, storedBID, setLoaderAct
         {num:'XE6141B', time: '12:21', price:'$25.21'},
     ];
 
-    const config = {
-        method: 'GET',
-        url: ORDER_BUSINESS_API + storedBID
-    }
-
-    useEffect (()=>{
-       const timer = setTimeout(()=>{
-           axios(config)
-               .then((response) =>{
-               if(response?.data){
-                   setOrder(response.data)
-               }
-               setLoaderAction(false);
-               })
-               .catch((error) => {
-                   setLoaderAction(false);
-                       console.log(error);
-               })
-       },3000);
-       return ()=> clearTimeout(timer);
-    },[]);
-
     return(
         <View style={styles.container}>
-            <Modal animationType='fade' transparent={true}
-                   visible={openDrawer} onRequestClose={()=>{setOpenDrawer(!openDrawer);}}>
-                <View style={styles.modalContainer}>
-                    <View style={styles.drawer}>
-                        <TouchableOpacity style={styles.drawerHeader}onPress={()=>setOpenDrawer(!openDrawer)}>
-                            <Text style={styles.drawerHeaderText}>{businessName}</Text>
-                            <FontAwesome5 name='angle-right' style={styles.drawerHeaderIcon}/></TouchableOpacity>
-                        <TouchableOpacity style={styles.drawerOptions} onPress={()=>navigation.replace(Routes.BusinessHomeScreen)}>
-                            <FontAwesome5 name='home' style={styles.drawerText}/><Text style={styles.drawerText}>Home</Text></TouchableOpacity>
-                        <TouchableOpacity style={styles.drawerOptions} onPress={()=>navigation.replace(Routes.BusinessQueueScreen)}>
-                            <FontAwesome5 name='user-friends' style={styles.drawerText}/><Text style={styles.drawerText}>Queue</Text></TouchableOpacity>
-                        <TouchableOpacity style={styles.drawerOptions} onPress={()=>navigation.replace(Routes.BusinessOrdersScreen)}>
-                            <FontAwesome5 name='clipboard-list' style={styles.drawerText}/><Text style={styles.drawerText}>Order</Text></TouchableOpacity>
-                        <TouchableOpacity style={styles.drawerOptions} onPress={()=>navigation.replace(Routes.BusinessProfileScreen)}>
-                            <FontAwesome5 name='user' style={styles.drawerText}/><Text style={styles.drawerText}>Profile</Text></TouchableOpacity>
-                    </View>
-
-                </View>
-            </Modal>
-
             <View style={styles.topBar}>
-                <TouchableOpacity style = {styles.centralize} onPress = {() => setOpenDrawer(!openDrawer) }>
+                <TouchableOpacity style = {{justifyContent: 'center'}} onPress = {() => navigation.push(Routes.OrderHistoryScreen) }>
                     <FontAwesome5 name={'bars'} style={styles.menuIcon}/></TouchableOpacity>
-                <Text style={styles.barText}>{businessName}</Text>
-                <TouchableOpacity style = {styles.centralize}>
-                    <FontAwesome5 name={'bars'} style={styles.whiteColor}/></TouchableOpacity>
+                <Text style={styles.barText}>Din Tai Fung</Text>
+                <TouchableOpacity style = {{justifyContent: 'center'}} onPress = {() => navigation.push(Routes.OrderHistoryScreen) }>
+                    <FontAwesome5 name={'bars'} style={{color:'#ffffff'}}/></TouchableOpacity>
             </View>
             <ScrollView style={styles.body}>
-                <View style={styles.header}>
-                    <Text style={styles.headerText}>Order No.</Text>
-                    <Text style={styles.headerText}>Time</Text>
-                    <Text style={styles.headerText}>Price</Text>
+                <View style={{flexDirection: 'row', justifyContent: 'space-evenly', marginBottom: 10}}>
+                    <Text style={{fontSize: 17, fontWeight: 'bold', textDecorationLine: 'underline'}}>Order No.</Text>
+                    <Text style={{fontSize: 17, fontWeight: 'bold', textDecorationLine: 'underline'}}>Time</Text>
+                    <Text style={{fontSize: 17, fontWeight: 'bold', textDecorationLine: 'underline'}}>Price</Text>
                     <FontAwesome5 name='angle-right' style={{fontSize: 25, color: 'white'}}/>
                 </View>
                 {OrderList.map((item, index) => (
@@ -118,17 +70,10 @@ const ShowItemFunc = (props) => {
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        storedBID: state?.UserReducer?.bid ? state.UserReducer.bid : '',
-        businessName: state?.UserReducer?.name ? state.UserReducer.name : '',
-    }
-};
-
 const mapDispatchToProps = dispatch => {
     return {
         setLoaderAction: params => dispatch(setLoader(params)),
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BusinessOrdersScreen);
+export default connect(null, mapDispatchToProps)(BusinessOrdersScreen);

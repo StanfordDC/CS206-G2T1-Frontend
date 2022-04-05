@@ -1,14 +1,12 @@
 import React, {useState} from 'react';
 import {View, Text, TextInput, TouchableOpacity, Keyboard} from 'react-native';
-import axios from 'axios';
-import {setLoader, setStoredBID, setBusinessName} from '../../../redux/actions/CommonAction';
+import {setLoader} from '../../../redux/actions/CommonAction';
 import {connect} from 'react-redux';
-import {BUSINESS_LOGIN_API} from '../../../utils/Const';
 
 import styles from './styles';
 import Routes from '../../../router/routes';
 
-const BusinessLoginScreen = ({setLoaderAction, navigation, setStoredBID, setBusinessName}) => {
+const BusinessLoginScreen = ({setLoaderAction, navigation}) => {
 
     const [uen, setUen] = useState('');
     const [password, setPassword] = useState('');
@@ -18,30 +16,10 @@ const BusinessLoginScreen = ({setLoaderAction, navigation, setStoredBID, setBusi
 
     const SignIn = async() => {
         Keyboard.dismiss();
-
-        const config = {
-            method: 'GET',
-            url: BUSINESS_LOGIN_API + uen + '/' + password + '/'
-        };
-
         if (uen !== '' && password !== ''){
-             setLoginError('');
-             setLoaderAction(true);
-             axios(config)
-                .then((response) =>{
-                    if(response?.data){
-//                         console.log(response.data.bid)
-                        setStoredBID(response.data.bid);
-                        setBusinessName(response.data.name);
-                        navigation.push(Routes.BusinessHomeScreen);
-                    }
-                    setLoaderAction(false);
-                })
-                .catch((error) => {
-                    setLoaderAction(false);
-                    console.log(error);
-                    setLoginError(error);
-                })
+//             //setLoaderAction(true)
+//             //await fetch
+            navigation.push(Routes.BusinessProfileScreen);
         }
         if (uen !== ''){setUenError('')}
         else{setUenError('UEN should not be empty')}
@@ -93,12 +71,9 @@ const BusinessLoginScreen = ({setLoaderAction, navigation, setStoredBID, setBusi
     );
 }
 
-
 const mapDispatchToProps = dispatch => {
     return {
         setLoaderAction: params => dispatch(setLoader(params)),
-        setStoredBID: params => dispatch(setStoredBID(params)),
-        setBusinessName: params => dispatch(setBusinessName(params)),
     };
 };
 

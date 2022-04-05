@@ -1,59 +1,24 @@
 import React, {useState} from 'react';
 import {Keyboard, Text, View, TextInput, TouchableOpacity} from 'react-native';
-import axios from 'axios';
 import {setLoader} from '../../../redux/actions/CommonAction';
 import {connect} from 'react-redux';
-import {BUSINESS_API} from '../../../utils/Const';
 
 import styles from './styles';
 import Routes from '../../../router/routes';
 
-const BusinessRegistrationScreen = ({navigation, setLoaderAction}) => {
+const UserRegistrationScreen = ({navigation}) => {
 
- const [uen, setUen] = useState('');
+ const [username, setUsername] = useState('');
  const [password, setPassword] = useState('');
- const [name, setName] = useState('');
+ const [email, setEmail] = useState('');
  const [contact, setContact] = useState('');
- const [website, setWebsite] = useState('');
  const [error, setError] = useState('');
 
  const SignUp = async()=> {
     Keyboard.dismiss();
-
-    const config = {
-        method: 'POST',
-        url: BUSINESS_API,
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        data: {
-             'uen': uen,
-             'password': password,
-             'name': name,
-             'contact_number': contact,
-             'mid': 0,
-             'authorities': 'ROLE_USER',
-             'waiting_time': 0,
-             'website': website
-        }
-    }
-
-    if (uen !== '' && password !== '' && name !== '' && contact !== '' && website !== ''){
+    if (username !== '' && password !== '' && email !== '' && contact !== ''){
         setError('');
-        setLoaderAction(true);
-        axios(config)
-            .then((response) => {
-                if (response?.data){
-//                     console.log(response.data)
-                    navigation.pop();
-                }
-                setLoaderAction(false);
-            })
-            .catch((error) => {
-                setLoaderAction(false);
-//                 console.log(error);
-                setError(error);
-            })
+        nav.navigation('location');
     }
     else{
         setError('Please fill up all the field');
@@ -68,15 +33,16 @@ const BusinessRegistrationScreen = ({navigation, setLoaderAction}) => {
         </View>
       <View style={styles.form}>
         <Text style={styles.error}>{error}</Text>
-        <TextInput placeholder="Enter UEN"
+        <TextInput placeholder="Enter Username"
                     style={styles.inputStyle}
-                    onChangeText={(updateUen)=>setUen(updateUen)}
+                    onChangeText={(updateUser)=>setUsername(updateUser)}
                     autoCapitalize={'none'}
                     autoCorrect={false}/>
 
-        <TextInput placeholder="Enter Name"
+        <TextInput placeholder="Enter Email"
                     style={styles.inputStyle}
-                    onChangeText={(updateName)=>setName(updateName)}
+                    onChangeText={(updateEmail)=>setEmail(updateEmail)}
+                    keyboardType='email-address'
                     autoCapitalize={'none'}
                     autoCorrect={false}/>
 
@@ -85,15 +51,11 @@ const BusinessRegistrationScreen = ({navigation, setLoaderAction}) => {
                     onChangeText={(updateContact)=>setContact(updateContact)}
                     keyboardType='numeric'/>
 
-       <TextInput placeholder="Enter Website"
-                  style={styles.inputStyle}
-                  onChangeText={(updateWebsite)=>setWebsite(updateWebsite)}
-                  secureTextEntry={true}/>
-
         <TextInput placeholder="Enter Password"
                    style={styles.inputStyle}
                    onChangeText={(updatePass)=>setPassword(updatePass)}
                    secureTextEntry={true}/>
+
 
       </View>
       <TouchableOpacity style={styles.button} onPress={SignUp}>
@@ -114,4 +76,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(BusinessRegistrationScreen);
+export default connect(null, mapDispatchToProps)(UserRegistrationScreen);

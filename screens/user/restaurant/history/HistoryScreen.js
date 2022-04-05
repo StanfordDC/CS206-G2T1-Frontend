@@ -4,6 +4,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {setLoader} from '../../../../redux/actions/CommonAction';
 import {connect} from 'react-redux';
 
+
 import styles from './styles';
 import Routes from '../../../../router/routes';
 

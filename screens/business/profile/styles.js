@@ -7,57 +7,12 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.white,
         justifyContent: 'flex-start',
     },
-    modalContainer:{
-        flex:1,
-        backgroundColor: Colors.black40,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    drawer: {
-        width: '60%',
-        height: '100%',
-        backgroundColor: '#fff',
-        alignSelf: 'flex-start',
-        justifyContent: 'flex-start'
-    },
-    drawerHeader: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: 20,
-    },
-    drawerHeaderText: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        alignSelf:'center',
-        marginVertical: 10,
-    },
-    drawerHeaderIcon: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        alignSelf:'flex-end',
-        marginVertical: 10,
-    },
-    drawerOptions: {
-        flexDirection:'row',
-        height:70,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        borderColor: Colors.grey
-    },
-    drawerText: {
-        fontSize: 20,
-        marginHorizontal: 10,
-    },
-    menuIcon:{
-        fontSize: 25,
-        margin: 10,
-    },
     image:{
         flex:1,
         marginTop: 30,
         justifyContent:'center',
         alignItems: 'center',
+        backgroundColor: Colors.black,
     },
     body:{
         flex:3,
@@ -70,8 +25,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     table:{
-        marginTop: 20,
-        height: '50%',
+        marginTop: 20
     },
     rows: {
         width:'100%',
@@ -83,13 +37,11 @@ const styles = StyleSheet.create({
     },
     rowHeader: {
         marginHorizontal: 20,
-        width: 120,
-        fontSize: 15,
+        width: 100
     },
     rowText: {
         marginHorizontal:20,
-        color: Colors.grey2,
-        fontSize: 15
+        color: Colors.grey,
     },
     buttonContainer:{
         marginTop: 60,
