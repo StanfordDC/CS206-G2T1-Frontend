@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
   },
   form: {
     alignItems:'center',
-    marginTop: 30,
   },
   error: {
     color: Colors.errorRed,

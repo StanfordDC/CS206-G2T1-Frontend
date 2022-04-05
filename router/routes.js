@@ -2,8 +2,7 @@ const Routes = {
     SplashScreen: 'SplashScreen',
     UserLoginScreen: 'UserLoginScreen',
     UserRegistrationScreen: 'UserRegistrationScreen',
-    BusinessLoginScreen: 'BusinessLoginScreen',
-    BusinessRegistrationScreen :'BusinessRegistrationScreen',
+
 
     Customer: 'Customer',
     RestaurantScreen: 'RestaurantScreen',
@@ -12,12 +11,14 @@ const Routes = {
     HistoryScreen: 'HistoryScreen',
 
     OrderHistoryScreen: 'OrderHistoryScreen',
-    OrderScreen: 'OrderScreen',
 
-
+    //Business
+    BusinessLoginScreen: 'BusinessLoginScreen',
+    BusinessRegistrationScreen :'BusinessRegistrationScreen',
     BusinessProfileScreen: 'BusinessProfileScreen',
     BusinessHomeScreen: 'BusinessHomeScreen',
     BusinessOrdersScreen: 'BusinessOrdersScreen',
+    BusinessQueueScreen: 'BusinessQueueScreen',
 
 
     PaymentScreen: 'PaymentScreen',

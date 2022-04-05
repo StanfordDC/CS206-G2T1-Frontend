@@ -1,41 +1,171 @@
-import React, {useState} from 'react';
-import {View, Modal, Text, TouchableOpacity, ScrollView} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Modal, Text, TouchableOpacity, ScrollView, FlatList} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import axios from 'axios';
 import {setLoader} from '../../../redux/actions/CommonAction';
 import {connect} from 'react-redux';
+import {BUSINESS_API, SET_TABLE_API} from '../../../utils/Const';
 
 import styles from './styles';
 import Routes from '../../../router/routes';
 
 
-const BusinessHomeScreen = () =>{
-    const [modalVisible, setModalVisible] = useState(false);
+const BusinessHomeScreen = ({navigation, storedBID, setLoaderAction, businessName}) =>{
+    const [modalVisibleOne, setModalVisibleOne] = useState(false);
+    const [modalVisibleTwo, setModalVisibleTwo] = useState(false);
     const [isList, setIsList] = useState(true);
+    const [openDrawer, setOpenDrawer] = useState(false);
+
+    const [waitTimeOne, setWaitTimeOne] = useState(30);
+    const [waitTimeTwo, setWaitTimeTwo] = useState(50);
+    const [aveTime, setAveTime] = useState(30);
+    const [table, setTable] = useState([]);
+    const [tid, setTid] = useState('');
+    const [availability, setAvailability] = useState(true);
+    const [isAvailable, setIsAvailable] = useState('');
+
+    const config = {
+        method: 'GET',
+        url: BUSINESS_API + storedBID + '/table',
+    };
+
+    useEffect (() => {
+        const timer = setTimeout(()=>{
+            axios(config)
+                .then((response) =>{
+                if(response?.data){
+                    setTable(response.data)
+                }
+                setLoaderAction(false);
+                })
+                .catch((error) => {
+                    setLoaderAction(false);
+                        console.log(error);
+                })
+        },3000);
+        return ()=> clearTimeout(timer);
+    },[]);
+
+//     const changeTable = async() =>{
+//         setLoaderAction(true);
+//         if (availability == true){
+//             setIsAvailable('occupy')
+//         }
+//         else {
+//             setIsAvailable('free')
+//         }
+//         axios({
+//             method:'PUT',
+//             url: SET_TABLE_API + tid + '/' + isAvailable,
+//             header:{
+//                 'Content-Type': 'application/json'
+//             }
+//         })
+//         .then((response) =>{
+//             if(response?.data){
+//                 console.log('yes')
+//             }
+//             setLoaderAction(false);
+//             })
+//             .catch((error) => {
+//                 setLoaderAction(false);
+//                     console.log(error);
+//             })
+//
+//     }
+
+    const ShowListFunc = table.map((object, index)=> (
+        <TouchableOpacity style={styles.listItems} key={index.toString()} onPress={()=>{setTid(object.tid); setAvailability(object.availability); changeTable()}}>
+            <Text style={styles.listItemsText1}>Table {object.tid}</Text>
+            <Text style={styles.listItemsText2}>{object.type}</Text>
+            { object.availability ? <Text style={styles.listItemsText3}>Yes</Text>
+                                  : <Text style={styles.listItemsText4}>No</Text>
+            }
+        </TouchableOpacity>
+    ));
+
+    const ShowBlockFunc = table.map((object, index) => (
+        <TouchableOpacity style={object.availability ? styles.block1 : styles.block2} key={index.toString()}>
+            <Text style={styles.blockText1}>Table {object.tid}</Text>
+            <Text style={styles.blockText1}>Pax {object.type}</Text>
+            { object.availability ? <Text style={styles.blockText2}>Available</Text>
+                                  : <Text style={styles.blockText2}>No</Text>
+            }
+        </TouchableOpacity>
+    ));
 
     return(
         <View style={styles.container}>
-            <Modal animationType='fade'
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={()=>{setModalVisible(!modalVisible);}}>
+            <Modal animationType='fade' transparent={true}
+                   visible={openDrawer} onRequestClose={()=>{setOpenDrawer(!openDrawer);}}>
+                <View style={styles.modalContainer}>
+                    <View style={styles.drawer}>
+                        <TouchableOpacity style={styles.drawerHeader}onPress={()=>setOpenDrawer(!openDrawer)}>
+                            <Text style={styles.drawerHeaderText}>{businessName}</Text>
+                            <FontAwesome5 name='angle-right' style={styles.drawerHeaderIcon}/></TouchableOpacity>
+                        <TouchableOpacity style={styles.drawerOptions} onPress={()=>navigation.replace(Routes.BusinessHomeScreen)}>
+                            <FontAwesome5 name='home' style={styles.drawerText}/><Text style={styles.drawerText}>Home</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.drawerOptions} onPress={()=>navigation.replace(Routes.BusinessQueueScreen)}>
+                            <FontAwesome5 name='user-friends' style={styles.drawerText}/><Text style={styles.drawerText}>Queue</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.drawerOptions} onPress={()=>navigation.replace(Routes.BusinessOrdersScreen)}>
+                            <FontAwesome5 name='clipboard-list' style={styles.drawerText}/><Text style={styles.drawerText}>Order</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.drawerOptions} onPress={()=>navigation.replace(Routes.BusinessProfileScreen)}>
+                            <FontAwesome5 name='user' style={styles.drawerText}/><Text style={styles.drawerText}>Profile</Text></TouchableOpacity>
+                    </View>
+
+                </View>
+            </Modal>
+
+            <Modal animationType='fade' transparent={true}
+                    visible={modalVisibleOne} onRequestClose={()=>{setModalVisibleOne(!modalVisibleOne);}}>
                 <View style={styles.modalContainer}>
                     <View style={styles.modal}>
-                        <TouchableOpacity style={{alignSelf: 'flex-end', margin: 25}} onPress = {() => {setModalVisible(!modalVisible)}}>
-                            <FontAwesome5 name={'times'} style={{color:'#ffffff', fontSize: 30}}/></TouchableOpacity>
-                        <View style={{marginLeft: 50}}>
-                             <Text style={{fontSize: 18, color: '#ffffff'}}>Queue</Text>
-                            <Text style={{fontSize: 18, color: '#ffffff'}}>waiting time: </Text>
+                        <TouchableOpacity style={styles.closeModal} onPress = {() => {setModalVisibleOne(!modalVisibleOne)}}>
+                            <FontAwesome5 name={'times'} style={styles.closeButton}/></TouchableOpacity>
+                        <View style={styles.modalBody}>
+                             <Text style={styles.modalBodyText}>Queue</Text>
+                            <Text style={styles.modalBodyText}>waiting time: </Text>
                         </View>
-                        <View style={{flexDirection: 'row', alignItems:'center', justifyContent:'center', marginVertical: 10}}>
-                           <Text style={{fontSize:60, color: '#ffffff', fontWeight: 'bold'}}>50</Text>
-                           <Text style={{fontSize: 18, color: '#ffffff',marginTop:15, marginLeft: 10}}>mins</Text>
+                        <View style={styles.modalBodyText2Row}>
+                           <Text style={styles.modalBodyText2}>{waitTimeOne}</Text>
+                           <Text style={styles.modalBodyText3}>mins</Text>
                         </View>
-                        <View style={{flexDirection:'row', justifyContent:'center', marginVertical: 20}}>
-                            <TouchableOpacity style={{justifyContent:'center', alignItems: 'center', width: 120, height: 60, borderTopLeftRadius: 10, borderBottomLeftRadius: 10, overflow: 'hidden', borderWidth: 1, borderColor: '#ffffff', backgroundColor: '#5348AF80'}}>
-                                <FontAwesome5 name={'minus'} style={{color: '#ffffff', fontSize: 40 }}/>
+                        <View style={styles.modalButtonRow}>
+                            <TouchableOpacity style={styles.modalMinusButton}
+                                onPress={()=>setWaitTimeOne(waitTimeOne-1)}>
+                                <FontAwesome5 name={'minus'} style={styles.modalPlusMinusText}/>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{justifyContent:'center', alignItems: 'center', width:120, height: 60, borderTopRightRadius: 10, borderBottomRightRadius: 10, overflow: 'hidden', borderWidth: 1, borderColor: '#ffffff', backgroundColor: '#5348AF80'}}>
-                                <FontAwesome5 name={'plus'} style={{color: '#ffffff', fontSize: 40 }}/>
+                            <TouchableOpacity style={styles.modalPlusButton}
+                                onPress={()=>setWaitTimeOne(waitTimeOne+1)}>
+                                <FontAwesome5 name={'plus'} style={styles.modalPlusMinusText}/>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+
+            <Modal animationType='fade' transparent={true}
+                    visible={modalVisibleTwo} onRequestClose={()=>{setModalVisibleTwo(!modalVisibleTwo);}}>
+                <View style={styles.modalContainer}>
+                    <View style={styles.modal}>
+                        <TouchableOpacity style={styles.closeModal} onPress = {() => {setModalVisibleTwo(!modalVisibleTwo)}}>
+                            <FontAwesome5 name={'times'} style={styles.closeButton}/></TouchableOpacity>
+                        <View style={styles.modalBody}>
+                             <Text style={styles.modalBodyText}>Queue</Text>
+                            <Text style={styles.modalBodyText}>waiting time: </Text>
+                        </View>
+                        <View style={styles.modalBodyText2Row}>
+                           <Text style={styles.modalBodyText2}>{waitTimeTwo}</Text>
+                           <Text style={styles.modalBodyText3}>mins</Text>
+                        </View>
+                        <View style={styles.modalButtonRow}>
+                            <TouchableOpacity style={styles.modalMinusButton}
+                                onPress={()=>setWaitTimeTwo(waitTimeTwo-1)}>
+                                <FontAwesome5 name={'minus'} style={styles.modalPlusMinusText}/>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.modalPlusButton}
+                                onPress={()=>setWaitTimeTwo(waitTimeTwo+1)}>
+                                <FontAwesome5 name={'plus'} style={styles.modalPlusMinusText}/>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -43,78 +173,79 @@ const BusinessHomeScreen = () =>{
             </Modal>
 
             <View style={styles.topBar}>
-                <TouchableOpacity style = {{justifyContent: 'center'}} onPress = {() => navigation.push(Routes.OrderHistoryScreen) }>
+                <TouchableOpacity style = {styles.centralizeContent} onPress={()=>setOpenDrawer(true)}>
                     <FontAwesome5 name={'bars'} style={styles.menuIcon}/></TouchableOpacity>
-                <Text style={styles.barText}>Din Tai Fung</Text>
-                <TouchableOpacity style = {{justifyContent: 'center'}} onPress = {() => navigation.push(Routes.OrderHistoryScreen) }>
-                    <FontAwesome5 name={'bars'} style={{color:'#ffffff'}}/></TouchableOpacity>
+                <Text style={styles.topBarText}>{businessName}</Text>
+                <TouchableOpacity style = {styles.centralizeContent}>
+                    <FontAwesome5 name={'bars'} style={styles.whiteColor}/></TouchableOpacity>
             </View>
 
             <View style={styles.secondBar}>
-                <TouchableOpacity style={styles.waitingButton} onPress={()=>{setModalVisible(true)}}>
-                    <View>
-                    <Text style={{fontSize: 18, color: '#ffffff'}}>Queue</Text>
-                    <Text style={{fontSize: 18, color: '#ffffff'}}>waiting time: </Text>
-                    </View>
-                    <View style={{flexDirection: 'row', alignItems:'center'}}>
-                        <Text style={{fontSize:60, color: '#ffffff', fontWeight: 'bold'}}>50</Text>
-                        <Text style={{fontSize: 18, color: '#ffffff',marginTop:15, marginLeft: 10}}>mins</Text>
-                    </View>
-                </TouchableOpacity>
-                <Text style={styles.averageWaiting}> Average waiting time: 30 mins</Text>
+                <View style={styles.row}>
+                    <TouchableOpacity style={styles.waitingButton} onPress={()=>{setModalVisibleOne(true)}}>
+                        <View>
+                        <Text style={styles.secondBarText1}>2 Pax Waiting Time: </Text>
+                        </View>
+                        <View style={styles.waitingButtonBody}>
+                            <Text style={styles.secondBarText2}>{waitTimeOne}</Text>
+                            <Text style={styles.secondBarText3}>mins</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.waitingButton} onPress={()=>{setModalVisibleTwo(true)}}>
+                        <View>
+                        <Text style={styles.secondBarText1}>5 Pax Waiting Time: </Text>
+                        </View>
+                        <View style={styles.waitingButtonBody}>
+                            <Text style={styles.secondBarText2}>{waitTimeTwo}</Text>
+                            <Text style={styles.secondBarText3}>mins</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <Text style={styles.averageWaiting}> Average waiting time: {aveTime} mins</Text>
             </View>
-            <View style={{marginTop: 10, width: '100%',}}>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 15, marginBottom: 10}}>
-                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                        <TouchableOpacity onPress={()=>{setIsList(true)}}><FontAwesome5 name='list' style={{color: '#000000', fontSize: 25,marginHorizontal: 10}}/></TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{setIsList(false)}}><FontAwesome5 name='border-all' style={{color: '#000000', fontSize: 25, marginHorizontal: 5}}/></TouchableOpacity>
+            <View style={styles.body}>
+                <View style={styles.thirdBar}>
+                    <View style={styles.listRow}>
+                        <TouchableOpacity onPress={()=>{setIsList(true)}}><FontAwesome5 name='list' style={[isList ? styles.pressedButton1: styles.unPressedButton1]}/></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>{setIsList(false)}}><FontAwesome5 name='border-all' style={[isList ? styles.unPressedButton2 : styles.pressedButton2]}/></TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={{height: 25, width: 70, borderRadius: 4, borderWidth:2, borderColor:'#0000000', justifyContent:'center', alignItems:'center'}}><Text>Edit</Text></TouchableOpacity>
                     <TouchableOpacity style={{flexDirection:'row', alignItems: 'center', alignSelf:'flex-end'}}>
                         <Text>Sort by</Text>
                         <FontAwesome5 name='sort' style={{color: '#000000', fontSize: 25,marginHorizontal: 5}}/>
                     </TouchableOpacity>
                 </View>
-                {isList ? <SortByList/> : <SortByDiagram/>}
-            </View>
 
+
+            </View>
+            {
+                isList
+                    ? <ScrollView>
+                         <View>
+                         <View style={styles.listHeader}>
+                             <Text style={styles.listHeaderText1}>Table</Text>
+                             <Text style={styles.listHeaderText2}>Pax</Text>
+                             <Text style={styles.listHeaderText3}>Availability</Text>
+                         </View>
+                             {ShowListFunc}
+                         </View>
+                    </ScrollView>
+                    : <ScrollView>
+                        <View styles={styles.blockBody}>
+                            {ShowBlockFunc}
+                        </View>
+                    </ScrollView>
+            }
         </View>
     );
 }
 
-const TableList = [
-    {table: 'Window Seat 1', pax: '5', availability: '20 mins'},
-    {table: 'Window Seat 2',pax: '10', availability: '50 mins'},
-    {table: 'Window Seat 3', pax: '5', availability: '20mins'},
-    {table: 'Seat 1', pax: '3', availability: '20mins'},
-    {table: 'Seat 2', pax: '2', availability: '20mins'}
-];
 
-const SortByList = () =>{
-
-    return(
-        <ScrollView>
-            <View style={{paddingHorizontal: 10,}}>
-                {TableList.map((item, index) => (
-                    <Text key={index.toString()}>{item.table} {item.pax} {item.availability}</Text>
-                ))}
-            </View>
-        </ScrollView>
-    );
-}
-
-const SortByDiagram = () =>{
-    return(
-        <ScrollView>
-            <View style={{paddingHorizontal: 10, }}>
-                {TableList.map((item, index) => (
-                    <TouchableOpacity key={index.toString()} style={{height:50, width: 50, color:'#000'}}><Text style={{color:'white'}}>{item.table}</Text>
-                    </TouchableOpacity>
-                ))}
-            </View>
-        </ScrollView>
-    );
-}
+const mapStateToProps = state => {
+    return {
+        storedBID: state?.UserReducer?.bid ? state.UserReducer.bid : '',
+        businessName: state?.UserReducer?.name ? state.UserReducer.name : '',
+    }
+};
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -122,4 +253,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(BusinessHomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(BusinessHomeScreen);

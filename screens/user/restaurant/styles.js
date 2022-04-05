@@ -1,4 +1,6 @@
 import {StyleSheet} from 'react-native';
+import Colors from '../../../utils/Colors';
+
 
 const styles = StyleSheet.create({
   layout: {
@@ -6,6 +8,30 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
+  },
+  modalContainer:{
+      flex:1,
+      backgroundColor: Colors.black40,
+      alignItems: 'center',
+      justifyContent: 'center',
+  },
+  modal:{
+      backgroundColor: Colors.themeBlue,
+      alignSelf: 'center',
+      height: 200,
+      width: '80%',
+      borderRadius: 10,
+  },
+  closeModal:{
+      alignSelf: 'flex-end',
+      margin: 25
+  },
+  closeButton: {
+      color: Colors.white,
+      fontSize: 30
+  },
+  modalBody:{
+      marginLeft: 50
   },
   title: {
     fontSize: 32,
@@ -21,8 +47,10 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#4236A7',
     alignSelf: 'center',
-    padding: 10,
+    paddingVertical: 10,
+    alignItems: 'center',
     borderRadius: 5,
+    width: 150,
   },
   restaurant: {
     backgroundColor: 'white',

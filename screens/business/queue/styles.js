@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         backgroundColor: Colors.white,
+        alignItems: 'center',
         justifyContent: 'flex-start',
     },
     modalContainer:{
@@ -49,62 +50,22 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginHorizontal: 10,
     },
+    topBar:{
+        width: '100%',
+        marginTop: 30,
+        paddingHorizontal: 20,
+        height: 60,
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+    },
     menuIcon:{
         fontSize: 25,
-        margin: 10,
     },
-    image:{
-        flex:1,
-        marginTop: 30,
-        justifyContent:'center',
-        alignItems: 'center',
-    },
-    body:{
-        flex:3,
-    },
-    header:{
-        fontSize: 18,
+    barText: {
         fontWeight: 'bold',
-        textDecorationLine: 'underline',
-        marginHorizontal: 15,
-        marginTop: 20,
+        fontSize: 25,
+        alignSelf: 'center'
     },
-    table:{
-        marginTop: 20,
-        height: '50%',
-    },
-    rows: {
-        width:'100%',
-        height: 50,
-        flexDirection:'row',
-        alignItems: 'center',
-        borderWidth: StyleSheet.hairlineWidth,
-        borderColor: Colors.grey
-    },
-    rowHeader: {
-        marginHorizontal: 20,
-        width: 120,
-        fontSize: 15,
-    },
-    rowText: {
-        marginHorizontal:20,
-        color: Colors.grey2,
-        fontSize: 15
-    },
-    buttonContainer:{
-        marginTop: 60,
-        alignItems: 'center',
-    },
-    button:{
-        width: '75%',
-        height: 50,
-        justifyContent: 'center',
-        alignItems:'center',
-        borderRadius: 10,
-        backgroundColor: Colors.themeBlue
-    },
-    buttonText:{
-        color: Colors.white,
-    }
-})
+
+});
 export default styles;

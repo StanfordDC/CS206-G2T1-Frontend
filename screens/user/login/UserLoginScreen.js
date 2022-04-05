@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
 import {Keyboard, Text, View, TextInput, TouchableOpacity} from 'react-native';
-import {setLoader} from '../../../redux/actions/CommonAction';
+import axios from 'axios';
+import {setLoader, setStoredCID, setCustomerName} from '../../../redux/actions/CommonAction';
 import {connect} from 'react-redux';
+import {CUSTOMER_LOGIN_API} from '../../../utils/Const';
 
 import styles from './styles';
 import Routes from '../../../router/routes';
 
-const UserLoginScreen = ({navigation}) => {
+const UserLoginScreen = ({navigation, setLoaderAction, setStoredCID, setCustomerName}) => {
 
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userError, setUserError] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -16,11 +18,33 @@ const UserLoginScreen = ({navigation}) => {
 
   const SignIn = async() => {
     Keyboard.dismiss();
-    if (username !== '' && password !== ''){
-        navigation.replace(Routes.Customer, {screen: Routes.RestaurantScreen});
+
+    const config = {
+        method: 'GET',
+        url: CUSTOMER_LOGIN_API + email + '/' + password + '/'
+    };
+
+    if (email !== '' && password !== ''){
+        setUserError('');
+        setPasswordError('');
+        setLoaderAction(true);
+        axios(config)
+            .then((response) =>{
+                    if(response?.data){
+                        setStoredCID(response.data.cid)
+                        setCustomerName(response.data.name)
+                        navigation.push(Routes.Customer, {screen:Routes.RestaurantScreen});
+                    }
+                    setLoaderAction(false);
+                })
+                .catch((error) => {
+                    setLoaderAction(false);
+                    console.log(error);
+                    setLoginError(error);
+                })
     }
-    if (username !== ''){setUserError('')}
-    else{setUserError('Username should not be empty')}
+    if (email !== ''){setUserError('')}
+    else{setUserError('Email should not be empty')}
     if (password !== ''){setPasswordError('')}
     else{setPasswordError('Password should not be empty')}
   }
@@ -29,9 +53,9 @@ const UserLoginScreen = ({navigation}) => {
     <View style={styles.container}>
       <Text style={styles.logo}> Q-now </Text>
       <View style={styles.form}>
-        <TextInput placeholder="Enter Username"
+        <TextInput placeholder="Enter Email"
                    style={styles.inputStyle}
-                   onChangeText={(updateUser)=>setUsername(updateUser)}
+                   onChangeText={(updateEmail)=>setEmail(updateEmail)}
                    onChange={()=>setUserError('')}
                    autoCapitalize={'none'}
                    autoCorrect={false}
@@ -69,6 +93,8 @@ const UserLoginScreen = ({navigation}) => {
 const mapDispatchToProps = dispatch => {
     return {
         setLoaderAction: params => dispatch(setLoader(params)),
+        setStoredCID: params => dispatch(setStoredCID(params)),
+        setCustomerName: params => dispatch(setCustomerName(params)),
     };
 };
 

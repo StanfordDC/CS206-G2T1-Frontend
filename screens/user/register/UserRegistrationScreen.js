@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import {Keyboard, Text, View, TextInput, TouchableOpacity} from 'react-native';
+import axios from 'axios';
 import {setLoader} from '../../../redux/actions/CommonAction';
 import {connect} from 'react-redux';
+import {CREATE_CUSTOMER_API} from '../../../utils/Const';
 
 import styles from './styles';
 import Routes from '../../../router/routes';
 
-const UserRegistrationScreen = ({navigation}) => {
+const UserRegistrationScreen = ({navigation, setLoaderAction}) => {
 
  const [username, setUsername] = useState('');
  const [password, setPassword] = useState('');
@@ -16,9 +18,39 @@ const UserRegistrationScreen = ({navigation}) => {
 
  const SignUp = async()=> {
     Keyboard.dismiss();
+
+    const config ={
+        method: 'POST',
+        url: CREATE_CUSTOMER_API,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: {
+            "name": username,
+            "email": email,
+            "phone_no": contact,
+            "password": password,
+            "card_name": "card",
+            "authorities": "ROLE_USER",
+            "expiry_date": "2016-01-25T21:34:55"
+        }
+    };
+
     if (username !== '' && password !== '' && email !== '' && contact !== ''){
         setError('');
-        nav.navigation('location');
+        setLoaderAction(true);
+        axios(config)
+            .then((response) =>{
+                if(response?.data){
+//                     console.log(response.data)
+                    navigation.pop();
+                }
+                setLoaderAction(false);
+            })
+            .catch((error) => {
+                setLoaderAction(false);
+                console.log(error);
+            })
     }
     else{
         setError('Please fill up all your details');
