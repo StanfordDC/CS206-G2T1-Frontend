@@ -9,7 +9,7 @@
 
 # Frontend with ReactNative
 1. Using command prompt, get your IP address.
-2. In Const.js, change the ip to your own IP address in the format http://xxx.xxx.xxx.xxx:8082/
+2. In Const.js, change the ip to your own IP address in the format http://xxx.xxx.xxx.xxx:8081/
 3. Install Expo Go application in your mobile phone
 4. Do npm install
 5. Navigate to the directory where the code is, do npm start
